@@ -1,0 +1,14 @@
+[
+{
+    "innerLetter" : "v",
+    "outerLetters" : ["e", "a", "t", "g", "b", "l"],
+    "possibleWords" : ["agave", "bevel", "eave", "elevate", "gavage", "gave", "gavel", "lava", "lavage", "lave", "leave", "levee", "level", "vale", "valet", "valve", "veal", "vegetable", "vegetal", "vegetate", "velvet"],
+    "pangram": "vegetable"
+    },    
+    {
+    "innerLetter" : "l",
+    "outerLetters" : ["e", "x", "v", "t", "p", "i"],
+    "possibleWords" : ["elite", "evil", "exile", "expel", "expellee", "expletive", "levee", "level", "lilt", "lite", "little", "live", "peel", "pellet", "pelt", "pile", "pill", "pixel", "plie", "teletext", "telex", "tell", "textile", "tile", "till", "tilt", "tipple", "title", "tittle", "veil", "velvet", "vile"],
+    "pangram": "expletive"
+    }
+]
