@@ -23,21 +23,15 @@ function populateLetters(innerLetter, outerLetters) {
 	elOuterLetters.innerHTML = ',' + outerLetters;
 }
 
-// Checks the guess is 4 letters or longer
-function checkWordLength() {
-	if (elGuessBox.value.length < 4) {
-	return false;
-    } else return true;
+function updateWordsFound(word) {
+	elWordsFound.innerHTML = wordsFound;
 }
 
-// Checks if a guess contains every possible letter
-function checkIsPangram(word) {
-	for (let char of outerLetters) {
-		if (word.indexOf(char) === -1) {
-			return false;
-		}
-	}
+// Checks 4 letters or longer
+function checkWordLength(word) {
+	if (word.length >= 4) {
 	return true;
+    } else return false;
 }
 
 // Checks if the guess contains the inner letter
@@ -48,7 +42,7 @@ function checkContainsInnerLetter(word) {
 }
 
 // Checks there is no invalid letters
-function checkForInvalidLetters(word) {
+function checkOnlyValidLetters(word) {
 	for (let char of word) {
 		if (allLetters.indexOf(char) === -1) {
 			return false;
@@ -57,14 +51,48 @@ function checkForInvalidLetters(word) {
 	return true;
 }
 
-// WORK ON THIS NEXT *******************
-// // Checks the Guess against rules
-// function checkGuess(word) {
-//     if (checkWordLength(word)) {
-//     console.log("Word too Short");
-//     }
-//     else console.log("Word is over 4 chars");
-// }
+// Checks if word is a pangram
+function checkIsPangram(word) {
+	for (let char of allLetters) {
+		if (word.indexOf(char) === -1) {
+			return false;
+		}
+	}
+	return true;
+}
+
+// Checks the Guess against rules
+function checkGuessValid(word) {
+    if (!checkWordLength(word)) {
+    	console.log("Word is too short");
+		return false;
+    }
+	if (!checkContainsInnerLetter(word)) {
+		console.log("Missing center letter");
+		return false;
+	}
+	if (!checkOnlyValidLetters) {
+		console.log("Invalid letter included");
+		return false;
+	}
+	if (possibleWords.indexOf(word) === -1) {
+		console.log("Word not in list");
+		return false;
+	}
+	if (wordsFound.indexOf(word) >= 0) {
+		console.log("Word Already Found");
+		return false;
+	}
+	return true;
+}
+
+function checkGuess(word) {
+	if (checkGuessValid(word)) {
+		wordsFound.push(word);
+		console.log("Word added to array");
+		updateWordsFound(word)
+	}
+}
 
 let gameDataURL = '/gameData.json';
 let request = new XMLHttpRequest();
