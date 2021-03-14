@@ -7,6 +7,8 @@ const elInnerLetter = document.getElementById('innerLetter');
 const elOuterLetters = document.getElementById('outerLetters');
 const elErrorMessage = document.getElementById('submitFeedback');
 const elSubmitButton = document.getElementById('submitButton');
+const elScorebar = document.getElementById('scoreBar');
+const elScorebarLabel = document.getElementById('scoreBarLabel');
 const elWordsFound = document.getElementById('wordsFound');
 const elWordsFoundPlaceholder = document.getElementById('wordsFoundPlaceholder');
 
@@ -23,6 +25,7 @@ let possibleWords;
 let wordsFound = [];
 let runningScore = 0;
 let firstWordAdded = false;
+let maxGameScore = 0;
 
 elSubmitButton.addEventListener("click", function(event) {
 	event.preventDefault();
@@ -41,8 +44,12 @@ function checkWord() {
 	
 	console.log("adding word: " + word);
 	wordsFound.push(word);
+	
+	runningScore += calculateValidWordScore(word);
+	updateScore();
+	
 	updateWordsFound(word);
-
+	
 	elGuessBox.value = '';
 
 }
@@ -50,6 +57,13 @@ function checkWord() {
 function populateLetters(innerLetter, outerLetters) {
 	elInnerLetter.innerHTML = innerLetter;
 	elOuterLetters.innerHTML = ',' + outerLetters;
+}
+
+function calculateMaxScore() {
+	for(let word of possibleWords) {
+		maxGameScore += calculateValidWordScore(word);
+	}
+	console.log("calculated max score as " + maxGameScore);
 }
 
 /*Calculates and returns word score based on following rules
@@ -67,6 +81,17 @@ function calculateValidWordScore(word) {
 		score += POINTS_FOR_PANGRAM;
 	}
 	return score;
+}
+
+function updateScore() {
+	/*aria-valuenow="70"
+		  aria-valuemin="0" aria-valuemax="100" style="width:70%"*/		  
+	let scoreAsPercentageOfTotal = Math.round((runningScore/maxGameScore) * 100);
+	
+	elScorebar.style = "width: " + scoreAsPercentageOfTotal +"%";
+	elScorebar.setAttribute("aria-valuenow",  scoreAsPercentageOfTotal);
+	elScorebarLabel.innerHTML=runningScore + " / " + maxGameScore;
+
 }
 
 function updateWordsFound(word) {
@@ -166,4 +191,5 @@ request.onload = function() {
     allLetters = [...innerLetter, ...outerLetters];
 
 	populateLetters(innerLetter, outerLetters);
+	calculateMaxScore();
 };
