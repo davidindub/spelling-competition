@@ -8,6 +8,7 @@ const elOuterLetters = document.getElementById('outerLetters');
 const elErrorMessage = document.getElementById('submitFeedback');
 const elSubmitButton = document.getElementById('submitButton');
 const elWordsFound = document.getElementById('wordsFound');
+const elWordsFoundPlaceholder = document.getElementById('wordsFoundPlaceholder');
 
 //Game Constants
 const MIN_WORD_LENGTH = 4;
@@ -21,7 +22,7 @@ let allLetters;
 let possibleWords;
 let wordsFound = [];
 let runningScore = 0;
-
+let firstWordAdded = false;
 
 elSubmitButton.addEventListener("click", function(event) {
 	event.preventDefault();
@@ -56,7 +57,6 @@ function populateLetters(innerLetter, outerLetters) {
 	Word is 4 letters: 1 point
 	Word is greater than 4 letters: 1 point per letter 
 	Word is a pangram: extra 7 points.
-
 */
 function calculateValidWordScore(word) {
 	if(word.length == MIN_WORD_LENGTH) {
@@ -70,7 +70,24 @@ function calculateValidWordScore(word) {
 }
 
 function updateWordsFound(word) {
-	elWordsFound.innerHTML = wordsFound;
+
+	if(!firstWordAdded) {
+		wordsFoundPlaceholder.className = "d-none";	
+		firstWordAdded = true;
+	}
+
+	let span = document.createElement("span");
+
+	span.className = "px-2";
+
+	if(checkIsPangram(word)){
+		span.className += " bg-warning";
+	}
+
+	span.innerHTML = word;
+
+	elWordsFound.appendChild(span);
+
 }
 
 // Checks 4 letters or longer
