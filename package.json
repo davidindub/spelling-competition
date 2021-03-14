@@ -1,0 +1,22 @@
+{
+  "name": "spellingbee",
+  "version": "1.0.0",
+  "description": "Spelling Competition",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidindub/spellingcompetition.git"
+  },
+  "author": "David Kelly",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davidindub/spellingcompetition/issues"
+  },
+  "homepage": "https://github.com/davidindub/spellingcompetition#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
