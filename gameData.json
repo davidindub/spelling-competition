@@ -1,5 +1,11 @@
 [
-{
+    {
+    "innerLetter" : "e",
+    "outerLetters" : ["g", "w", "n", "l", "i", "h"],
+    "possibleWords" : ["engine", "gelee", "gelling", "gene", "genie", "genii", "ghee", "giggle", "glee", "glen", "heel", "heeling", "heinie", "hell", "henge", "hewing", "hewn", "hieing", "hinge", "innie", "legging", "liege", "lien", "line", "linen", "negligee", "neigh", "neighing", "nene", "newel", "niggle", "nine", "weenie", "weigh", "weighing", "well", "welling", "whee", "wheel", "wheelie", "wheeling", "when", "whew", "while", "whine", "wienie", "wiggle", "wile", "wine" ],
+    "pangram": "wheeling"
+    },
+    {
     "innerLetter" : "v",
     "outerLetters" : ["e", "a", "t", "g", "b", "l"],
     "possibleWords" : ["agave", "bevel", "eave", "elevate", "gavage", "gave", "gavel", "lava", "lavage", "lave", "leave", "levee", "level", "vale", "valet", "valve", "veal", "vegetable", "vegetal", "vegetate", "velvet"],
@@ -11,4 +17,4 @@
     "possibleWords" : ["elite", "evil", "exile", "expel", "expellee", "expletive", "levee", "level", "lilt", "lite", "little", "live", "peel", "pellet", "pelt", "pile", "pill", "pixel", "plie", "teletext", "telex", "tell", "textile", "tile", "till", "tilt", "tipple", "title", "tittle", "veil", "velvet", "vile"],
     "pangram": "expletive"
     }
-] 
+]
