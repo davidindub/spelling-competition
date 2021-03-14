@@ -25,3 +25,11 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Node Files
+.nyc_output/
+coverage/
+node_modules/
+npm-debug.log
+package-lock.json
+test/*.log
