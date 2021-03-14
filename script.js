@@ -6,6 +6,7 @@ const elGuessBox = document.getElementById('guessBox');
 const elInnerLetter = document.getElementById('innerLetter');
 const elOuterLetters = document.getElementById('outerLetters');
 const elErrorMessage = document.getElementById('submitFeedback');
+const elSubmitButton = document.getElementById('submitButton');
 const elWordsFound = document.getElementById('wordsFound');
 
 //Game Constants
@@ -22,9 +23,28 @@ let wordsFound = [];
 let runningScore = 0;
 
 
-document.getElementById('form').onsubmit = function() {
+elSubmitButton.addEventListener("click", function(event) {
+	event.preventDefault();
 	checkWord();
-};
+});
+
+
+
+function checkWord() {
+	let word = elGuessBox.value;
+	let isGuessValid = checkGuessValid(word);
+	
+	if(!isGuessValid) {
+		return;
+	}
+	
+	console.log("adding word: " + word);
+	wordsFound.push(word);
+	updateWordsFound(word);
+
+	elGuessBox.value = '';
+
+}
 
 function populateLetters(innerLetter, outerLetters) {
 	elInnerLetter.innerHTML = innerLetter;
@@ -112,13 +132,6 @@ function checkGuessValid(word) {
 	return true;
 }
 
-function checkGuess(word) {
-	if (checkGuessValid(word)) {
-		wordsFound.push(word);
-		console.log("Word added to array");
-		updateWordsFound(word)
-	}
-}
 
 let gameDataURL = '/gameData.json';
 let request = new XMLHttpRequest();
