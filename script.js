@@ -27,12 +27,42 @@ let runningScore = 0;
 let firstWordAdded = false;
 let maxGameScore = 0;
 
-elSubmitButton.addEventListener("click", function(event) {
-	event.preventDefault();
-	checkWord();
-});
+let gameDataURL = '/gameData.json';
+let request = new XMLHttpRequest();
+request.open('GET', gameDataURL);
+request.responseType = 'json';
+request.send();
 
+request.onload = function() {
+	const gameData = request.response;
+	console.log(gameData[0]);
 
+	innerLetter = gameData[0].innerLetter;
+	outerLetters = gameData[0].outerLetters;
+	possibleWords = gameData[0].possibleWords;
+    allLetters = [...innerLetter, ...outerLetters];
+
+	prepareInteractionListeners();
+
+	populateLetters(innerLetter, outerLetters);
+	calculateMaxScore();
+};
+
+/* View/Interaction setup */
+
+function prepareInteractionListeners() {
+	elSubmitButton.addEventListener("click", function(event) {
+		event.preventDefault();
+		checkWord();
+	});
+}
+
+function populateLetters(innerLetter, outerLetters) {
+	elInnerLetter.innerHTML = innerLetter;
+	elOuterLetters.innerHTML = ',' + outerLetters;
+}
+
+/* Game Interaction and View Logic */
 
 function checkWord() {
 	let word = elGuessBox.value;
@@ -54,40 +84,15 @@ function checkWord() {
 
 }
 
-function populateLetters(innerLetter, outerLetters) {
-	elInnerLetter.innerHTML = innerLetter;
-	elOuterLetters.innerHTML = ',' + outerLetters;
-}
-
-function calculateMaxScore() {
-	for(let word of possibleWords) {
-		maxGameScore += calculateValidWordScore(word);
-	}
-	console.log("calculated max score as " + maxGameScore);
-}
-
-/*Calculates and returns word score based on following rules
-	Assumes Word is Valid
-	Word is 4 letters: 1 point
-	Word is greater than 4 letters: 1 point per letter 
-	Word is a pangram: extra 7 points.
-*/
-function calculateValidWordScore(word) {
-	if(word.length == MIN_WORD_LENGTH) {
-		return POINTS_FOR_MIN_WORD;
-	}
-	let score = word.length; 
-	if(checkIsPangram(word)) {
-		score += POINTS_FOR_PANGRAM;
-	}
-	return score;
-}
-
 function updateScore() {
-	/*aria-valuenow="70"
-		  aria-valuemin="0" aria-valuemax="100" style="width:70%"*/		  
 	let scoreAsPercentageOfTotal = Math.round((runningScore/maxGameScore) * 100);
-	
+	/*
+		Setting properties of prograss bar as following examples"
+		aria-valuenow="70"
+		aria-valuemin="0" 
+		aria-valuemax="100" 
+		style="width:70%"
+	*/		  
 	elScorebar.style = "width: " + scoreAsPercentageOfTotal +"%";
 	elScorebar.setAttribute("aria-valuenow",  scoreAsPercentageOfTotal);
 	elScorebarLabel.innerHTML=runningScore + " / " + maxGameScore;
@@ -115,12 +120,16 @@ function updateWordsFound(word) {
 
 }
 
+
+/* Game Rules Logic */
+
 // Checks 4 letters or longer
 function checkWordLength(word) {
 	if (word.length >= MIN_WORD_LENGTH) {
 	return true;
     } else return false;
 }
+
 
 // Checks if the guess contains the inner letter
 function checkContainsInnerLetter(word) {
@@ -174,22 +183,30 @@ function checkGuessValid(word) {
 	return true;
 }
 
+/*Calculates and returns word score based on following rules
+	Assumes Word is Valid
+	Word is 4 letters: 1 point
+	Word is greater than 4 letters: 1 point per letter 
+	Word is a pangram: extra 7 points.
+*/
+function calculateValidWordScore(word) {
+	if(word.length == MIN_WORD_LENGTH) {
+		return POINTS_FOR_MIN_WORD;
+	}
+	let score = word.length; 
+	if(checkIsPangram(word)) {
+		score += POINTS_FOR_PANGRAM;
+	}
+	return score;
+}
+function populateLetters(innerLetter, outerLetters) {
+	elInnerLetter.innerHTML = innerLetter;
+	elOuterLetters.innerHTML = ',' + outerLetters;
+}
 
-let gameDataURL = '/gameData.json';
-let request = new XMLHttpRequest();
-request.open('GET', gameDataURL);
-request.responseType = 'json';
-request.send();
-
-request.onload = function() {
-	const gameData = request.response;
-	console.log(gameData[0]);
-
-	innerLetter = gameData[0].innerLetter;
-	outerLetters = gameData[0].outerLetters;
-	possibleWords = gameData[0].possibleWords;
-    allLetters = [...innerLetter, ...outerLetters];
-
-	populateLetters(innerLetter, outerLetters);
-	calculateMaxScore();
-};
+function calculateMaxScore() {
+	for(let word of possibleWords) {
+		maxGameScore += calculateValidWordScore(word);
+	}
+	console.log("calculated max score as " + maxGameScore);
+}
