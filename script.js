@@ -1,6 +1,9 @@
 // Game Data
 const alphabet = [ ...'abcdefghijklmnopqrstuvwxyz' ];
 
+const date = new Date();
+const currentYear = date.getFullYear();
+
 //Page Elements
 const elGuessBox = document.getElementById('guessBox');
 const elInnerLetter = document.getElementById('innerLetter');
@@ -10,6 +13,7 @@ const elSubmitButton = document.getElementById('submitButton');
 const elScorebar = document.getElementById('scoreBar');
 const elScorebarLabel = document.getElementById('scoreBarLabel');
 const elWordsFound = document.getElementById('wordsFound');
+const elPangramsFound = document.getElementById('pangramsFound');
 const elWordsFoundPlaceholder = document.getElementById('wordsFoundPlaceholder');
 
 //Game Constants
@@ -62,6 +66,8 @@ function populateLetters(innerLetter, outerLetters) {
 	elOuterLetters.innerHTML = ',' + outerLetters;
 }
 
+document.getElementById('currentYear').innerHTML = currentYear;
+
 /* Game Interaction and View Logic */
 
 function checkWord() {
@@ -82,6 +88,10 @@ function checkWord() {
 	
 	elGuessBox.value = '';
 
+}
+
+function displayErrorMessage(error) {
+	elErrorMessage.innerHTML = error;
 }
 
 function updateScore() {
@@ -106,18 +116,13 @@ function updateWordsFound(word) {
 		firstWordAdded = true;
 	}
 
-	let span = document.createElement("span");
-
-	span.className = "px-2";
-
 	if(checkIsPangram(word)){
-		span.className += " bg-warning";
+		elPangramsFound.innerHTML += ` ${word}`;
 	}
 
-	span.innerHTML = word;
-
-	elWordsFound.appendChild(span);
-
+	else {
+		elWordsFound.innerHTML = word + " " + elWordsFound.innerHTML;
+	}
 }
 
 
@@ -161,25 +166,26 @@ function checkIsPangram(word) {
 // Checks the Guess against rules
 function checkGuessValid(word) {
     if (!checkWordLength(word)) {
-    	console.log("Word is too short");
+    	displayErrorMessage("Word is too short");
 		return false;
     }
 	if (!checkContainsInnerLetter(word)) {
-		console.log("Missing center letter");
+		displayErrorMessage("Missing center letter");
 		return false;
 	}
 	if (!checkOnlyValidLetters) {
-		console.log("Invalid letter included");
+		displayErrorMessage("Invalid letter included");
 		return false;
 	}
 	if (possibleWords.indexOf(word) === -1) {
-		console.log("Word not in list");
+		displayErrorMessage("Word not in list");
 		return false;
 	}
 	if (wordsFound.indexOf(word) >= 0) {
-		console.log("Word Already Found");
+		displayErrorMessage("Word Already Found");
 		return false;
 	}
+	displayErrorMessage("");
 	return true;
 }
 
