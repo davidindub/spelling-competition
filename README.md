@@ -1,4 +1,4 @@
-# spellingcompetition
+# spelling-competition
 NYT Spelling Bee Tribute
 
 Tribute to the NY Times Spelling Bee games.
