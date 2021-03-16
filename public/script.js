@@ -31,7 +31,7 @@ let runningScore = 0;
 let firstWordAdded = false;
 let maxGameScore = 0;
 
-let gameDataURL = '/gameData.json';
+let gameDataURL = '/get-game-data';
 let request = new XMLHttpRequest();
 request.open('GET', gameDataURL);
 request.responseType = 'json';
@@ -40,9 +40,9 @@ request.send();
 request.onload = function() {
 	const gameData = request.response;
 
-	innerLetter = gameData[0].innerLetter;
-	outerLetters = gameData[0].outerLetters;
-	possibleWords = gameData[0].possibleWords;
+	innerLetter = gameData.innerLetter;
+	outerLetters = gameData.outerLetters;
+	possibleWords = gameData.possibleWords;
     allLetters = [...innerLetter, ...outerLetters];
 
 	prepareInteractionListeners();
@@ -64,8 +64,6 @@ function populateLetters(innerLetter, outerLetters) {
 	elInnerLetter.innerHTML = innerLetter;
 	elOuterLetters.innerHTML = ',' + outerLetters;
 }
-
-document.getElementById('currentYear').innerHTML = currentYear;
 
 /* Game Interaction and View Logic */
 
@@ -95,13 +93,7 @@ function displayErrorMessage(error) {
 
 function updateScore() {
 	let scoreAsPercentageOfTotal = Math.round((runningScore/maxGameScore) * 100);
-	/*
-		Setting properties of prograss bar as following examples"
-		aria-valuenow="70"
-		aria-valuemin="0" 
-		aria-valuemax="100" 
-		style="width:70%"
-	*/		  
+
 	elScorebar.style = "width: " + scoreAsPercentageOfTotal +"%";
 	elScorebar.setAttribute("aria-valuenow",  scoreAsPercentageOfTotal);
 	elScorebarLabel.innerHTML=runningScore + " / " + maxGameScore;
