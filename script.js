@@ -39,7 +39,6 @@ request.send();
 
 request.onload = function() {
 	const gameData = request.response;
-	console.log(gameData[0]);
 
 	innerLetter = gameData[0].innerLetter;
 	outerLetters = gameData[0].outerLetters;
