@@ -68,7 +68,7 @@ function populateLetters(innerLetter, outerLetters) {
 /* Game Interaction and View Logic */
 
 function checkWord() {
-	let word = elGuessBox.value;
+	let word = elGuessBox.value.toLowerCase();
 	let isGuessValid = checkGuessValid(word);
 	
 	if(!isGuessValid) {
