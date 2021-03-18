@@ -22,6 +22,17 @@
     "outerLetters" : ["c", "m", "l", "k", "h", "e"],
     "possibleWords" : ["cello", "chemo", "chock", "choke", "cloche", "clock", "cock", "cockle", "coho", "coke", "come", "cook", "cool", "echo", "hellhole", "hello", "hemlock", "hock", "hoke", "hole", "home", "hooch", "hook", "kohl", "kook", "loch", "lock", "loco", "loll", "look", "loom", "memo", "mock", "mohel", "mole", "moll", "mooch", "oleo"],
     "pangram": "hemlock"
+    },
+    {
+    "innerLetter" : "l",
+    "outerLetters" : ["e", "u", "t", "o", "n", "m"],
+    "possibleWords" : ["element", "emolument", "lemon", "lent", "lento", "loll", "lone", "loom", "loon", "loot", "lotto", "lout", "lull", "lulu", "lumen", "lune", "lute", "melee", "melon", "melt", "mettle", "mole", "moll", "molt", "molten", "motel", "mottle", "mule", "mull", "mullet", "nettle", "noel", "null", "oleo", "omelet", "omelette", "outlet", "tell", "telnet", "toll", "toluene", "tool", "tootle", "tulle", "tumult", "tunnel", "unlet"],
+    "pangram": "emolument"
+    },
+    {
+    "innerLetter" : "p",
+    "outerLetters" : ["e", "y", "t", "o", "n", "l"],
+    "possibleWords" : ["elope", "epee", "lollop", "loop", "loopy", "lope", "nope", "open", "openly", "opponent", "peel", "peen", "peep", "pellet", "peloton", "pelt", "penne", "penny", "pent", "peon", "peony", "people", "peppy", "petty", "peyote", "plenty", "plop", "plot", "ploy", "poet", "pole", "poll", "pollen", "polo", "polyp", "pone", "pontoon", "pony", "pool", "poop", "pope", "poppet", "poppy", "potent", "potently", "potty", "pylon", "teepee", "teletype", "tentpole", "tepee", "tope", "topple", "type", "typo", "yelp"],
+    "pangram": "potently"
     }
 ]
-
