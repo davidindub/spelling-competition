@@ -161,7 +161,7 @@ function checkGuessValid(word) {
 		return false;
     }
 	if (!checkContainsInnerLetter(word)) {
-		displayErrorMessage("Missing center letter");
+		displayErrorMessage("Missing required letter");
 		return false;
 	}
 	if (!checkOnlyValidLetters) {
