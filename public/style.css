@@ -2,3 +2,19 @@ h1, h5 {
     font-family: 'Gentium Book Basic', serif;
     font-weight: 700;
 }
+
+  .letterBox {
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    background-color: slategray;
+    color: #fff;
+    border-radius: 50px;
+    padding: 15px;
+    cursor: pointer;
+  }
+  
+  .letterBox:first-of-type {
+    color: #000;
+    background-color: #ffc107;
+  }
+  
