@@ -47,7 +47,7 @@ request.onload = function() {
 
 	prepareInteractionListeners();
 
-	populateLetters(innerLetter, outerLetters);
+	populateLetters(allLetters);
 	calculateMaxScore();
 };
 
@@ -60,9 +60,20 @@ function prepareInteractionListeners() {
 	});
 }
 
-function populateLetters(innerLetter, outerLetters) {
-	elInnerLetter.innerHTML = innerLetter;
-	elOuterLetters.innerHTML = ',' + outerLetters;
+function populateLetters(allLetters) {
+	allLetters.forEach(element => createLetterShape(element))
+}
+
+function createLetterShape(letter) {
+	let div = document.createElement("div");
+	div.classList.add("col");
+	div.classList.add("letterBox");
+	div.addEventListener("click", event => {
+		console.log(event);
+		document.getElementById("guessBox").value += letter.toUpperCase();
+	})
+	div.innerHTML = letter;
+	document.getElementById("letterList").appendChild(div);
 }
 
 /* Game Interaction and View Logic */
@@ -196,10 +207,7 @@ function calculateValidWordScore(word) {
 	}
 	return score;
 }
-function populateLetters(innerLetter, outerLetters) {
-	elInnerLetter.innerHTML = innerLetter;
-	elOuterLetters.innerHTML = ',' + outerLetters;
-}
+
 
 function calculateMaxScore() {
 	for(let word of possibleWords) {
