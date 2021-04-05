@@ -10,6 +10,7 @@ const elInnerLetter = document.getElementById('innerLetter');
 const elOuterLetters = document.getElementById('outerLetters');
 const elErrorMessage = document.getElementById('submitFeedback');
 const elSubmitButton = document.getElementById('submitButton');
+const elResetButton = document.getElementById('resetButton');
 const elScorebar = document.getElementById('scoreBar');
 const elScorebarLabel = document.getElementById('scoreBarLabel');
 const elWordsFound = document.getElementById('wordsFound');
@@ -57,7 +58,12 @@ function prepareInteractionListeners() {
 	elSubmitButton.addEventListener("click", function(event) {
 		event.preventDefault();
 		checkWord();
-	});
+	})
+	elResetButton.addEventListener("click", function(event) {
+		event.preventDefault();
+		elGuessBox.value = "";
+	})
+
 }
 
 function populateLetters(allLetters) {
