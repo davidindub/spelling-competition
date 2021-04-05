@@ -106,6 +106,7 @@ function checkWord() {
 	elGuessBox.value = '';
 
 }
+exports.checkWordLength = checkWordLength;
 
 function displayErrorMessage(error) {
 	elErrorMessage.innerHTML = error;

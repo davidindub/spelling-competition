@@ -3,6 +3,8 @@ const app = express();
 const path = require('path');
 const fs = require('fs');
 
+const gamesInPlay = [];
+
 let port = process.env.PORT;
 if (port == null || port == "") {
   port = 3000;
@@ -12,7 +14,7 @@ if (port == null || port == "") {
 app.use(express.static('public'))
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}!`)
+  console.log(`Spelling Competition launched, listening on  ${port}!`)
 });
 
 
