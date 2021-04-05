@@ -1,4 +1,6 @@
-const checkWordLength = require('./script');
+const script = require('./public/script');
+const checkWordLength = script.checkWordLength;
+
 
 test('abcd is sufficient length (4)', () => {
   expect(checkWordLength("4444")).toBe(true);
