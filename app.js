@@ -3,8 +3,6 @@ const app = express();
 const path = require('path');
 const fs = require('fs');
 
-const gamesInPlay = [];
-
 let port = process.env.PORT;
 if (port == null || port == "") {
   port = 3000;
