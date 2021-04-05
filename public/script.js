@@ -6,8 +6,6 @@ const currentYear = date.getFullYear();
 
 //Page Elements
 const elGuessBox = document.getElementById('guessBox');
-const elInnerLetter = document.getElementById('innerLetter');
-const elOuterLetters = document.getElementById('outerLetters');
 const elErrorMessage = document.getElementById('submitFeedback');
 const elSubmitButton = document.getElementById('submitButton');
 const elResetButton = document.getElementById('resetButton');
@@ -61,7 +59,12 @@ function prepareInteractionListeners() {
 	})
 	elResetButton.addEventListener("click", function(event) {
 		event.preventDefault();
+		clearErrorMessage();
 		elGuessBox.value = "";
+	})
+	elGuessBox.addEventListener("input" , function(event) {
+		event.preventDefault();
+		clearErrorMessage();
 	})
 
 }
@@ -75,8 +78,8 @@ function createLetterShape(letter) {
 	div.classList.add("col");
 	div.classList.add("letterBox");
 	div.addEventListener("click", event => {
-		console.log(event);
-		document.getElementById("guessBox").value += letter.toUpperCase();
+		clearErrorMessage();
+		elGuessBox.value += letter.toUpperCase();
 	})
 	div.innerHTML = letter;
 	document.getElementById("letterList").appendChild(div);
@@ -106,6 +109,10 @@ function checkWord() {
 
 function displayErrorMessage(error) {
 	elErrorMessage.innerHTML = error;
+}
+
+function clearErrorMessage() {
+	elErrorMessage.innerHTML = "";
 }
 
 function updateScore() {
